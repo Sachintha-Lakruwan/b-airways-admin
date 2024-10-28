@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { executeQuery } from "../../database/database";
+import { executeQuery } from "@database/database";
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);

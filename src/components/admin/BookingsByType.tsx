@@ -12,7 +12,7 @@ export default function BookingsByType() {
     const [data, setData] = useState<BookingTypeData[] | null>(null);
 
     const fetchBookingData = async () => {
-        const res = await fetch(`/api/admin/analytics/bookings/type_count?start_date=${startDate}&end_date=${endDate}`);
+        const res = await fetch(`/api/analytics/bookings_type_count?start_date=${startDate}&end_date=${endDate}`);
         const result: BookingTypeData[] = await res.json();
         setData(result);
     };

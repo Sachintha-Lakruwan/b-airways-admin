@@ -14,7 +14,7 @@ export default function PastFlightsData() {
     const [data, setData] = useState<PastFlightData[] | null>(null);
 
     const fetchPastFlights = async () => {
-        const res = await fetch(`/api/admin/analytics/flights/past_flight_data?origin=${origin}&destination=${destination}`);
+        const res = await fetch(`/api/analytics/past_flight_data?origin=${origin}&destination=${destination}`);
         const result: PastFlightData[] = await res.json();
         setData(result);
     };

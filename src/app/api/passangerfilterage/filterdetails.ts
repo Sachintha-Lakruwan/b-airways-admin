@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { executeQuery } from "../../../database/database"; // Adjust the path as needed
+import { executeQuery } from "@database/database"; // Adjust the path as needed
 
 export async function GET(request: NextRequest, { params }) {
     const { name } = params;

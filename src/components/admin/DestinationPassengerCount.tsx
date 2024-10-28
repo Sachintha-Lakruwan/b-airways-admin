@@ -8,7 +8,7 @@ export default function DestinationPassengerCount() {
     const [count, setCount] = useState(null);
 
     const fetchPassengerCount = async () => {
-        const res = await fetch(`/api/admin/analytics/passengers/destination_count?destination=${destination}&start_date=${startDate}&end_date=${endDate}`);
+        const res = await fetch(`/api/analytics/passengers/destination_count?destination=${destination}&start_date=${startDate}&end_date=${endDate}`);
         const result = await res.json();
         setCount(result.passenger_count);
     };

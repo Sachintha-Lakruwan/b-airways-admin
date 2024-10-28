@@ -9,7 +9,7 @@ export default function Home() {
         {/* Existing content */}
         
         {/* Link to Admin Login */}
-        <Link href="/admin/home/login" className="text-blue-600 hover:underline">
+        <Link href="/admin/login" className="text-blue-600 hover:underline">
           Go to Admin Login
         </Link>
       </main>
