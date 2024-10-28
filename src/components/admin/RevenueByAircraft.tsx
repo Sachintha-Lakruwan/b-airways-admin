@@ -6,7 +6,7 @@ export default function RevenueByAircraft() {
     const [revenue, setRevenue] = useState(null);
 
     const fetchRevenueData = async () => {
-        const res = await fetch(`/api/admin/analytics/revenue?airplane_model=${airplaneModel}`);
+        const res = await fetch(`/api/analytics/revenue?airplane_model=${airplaneModel}`);
         const result = await res.json();
         setRevenue(result.total_revenue);
     };
