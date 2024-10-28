@@ -1,16 +1,17 @@
 "use client"
 // Navbar.tsx
 import React, { useState } from "react";
+import Link from "next/link"; // Import Link from Next.js
 
 const Navbar = ({ children }) => {
-    // Define the topics as a state variable
-    const [topics, setTopics] = useState<string[]>([
-        "Flight Search",
-        "Bookings",
-        "Flight Status",
-        "Customer Support",
-        "Settings",
-    ]);
+    // Define the topics and their corresponding URLs
+    const topics = [
+        { name: "VIEW PASSENGERS BY AGE", path: "/passengersByAge" },
+        { name: "PASSENGER COUNT BY DESTINATION", path: "/passengerCountDest" },
+        { name: "BOOKINGS BY PASSENGER TYPE", path: "/BookingsByType" },
+        { name: "FLIGHT HISTORY & PASSENGER DATA", path: "/flightHistory" },
+        { name: "TOTAL REVENUE", path: "/totalRevenue" },
+    ];
 
     return (
         <div className="flex">
@@ -19,7 +20,9 @@ const Navbar = ({ children }) => {
                 <ul className="space-y-2">
                     {topics.map((topic, index) => (
                         <li key={index} className="p-2 hover:bg-gray-700 rounded">
-                            {topic}
+                            <Link href={topic.path}>
+                                {topic.name}
+                            </Link>
                         </li>
                     ))}
                 </ul>
