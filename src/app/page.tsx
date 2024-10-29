@@ -1,6 +1,7 @@
 // src/app/page.tsx
 import Link from "next/link";
 import Image from "next/image";
+import BookingsByType from "@/components/admin/BookingsByType";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <Link href="/admin/login" className="text-blue-600 hover:underline">
           Go to Admin Login
         </Link>
+        <BookingsByType />
       </main>
       {/* Existing footer */}
     </div>

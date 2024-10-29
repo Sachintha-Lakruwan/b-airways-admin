@@ -1,3 +1,5 @@
+"use client"
+
 // src/components/admin/BookingsByType.tsx
 import { useState } from "react";
 

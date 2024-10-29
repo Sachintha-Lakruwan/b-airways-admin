@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../../database/database";
 
 export async function GET(request: NextRequest) {
+    console.log("hereee")
     const { searchParams } = new URL(request.url);
     const startDate = searchParams.get("start_date");
     const endDate = searchParams.get("end_date");
