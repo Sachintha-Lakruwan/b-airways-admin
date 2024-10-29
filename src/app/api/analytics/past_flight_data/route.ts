@@ -17,7 +17,8 @@ export async function GET(request: NextRequest) {
 
     const pastFlightsQuery = `
         SELECT 
-            CONCAT(s.flight_code, ' - ', s.date) AS flight,
+            s.flight_code,
+            s.date,
             CASE 
                 WHEN MAX(s.delay) > '00:00:00' THEN CONCAT('Delayed ', MAX(s.delay))
                 ELSE 'On-time'
@@ -31,11 +32,16 @@ export async function GET(request: NextRequest) {
         AND s.date < CURRENT_DATE
         GROUP BY s.flight_code, s.date
         ORDER BY s.date DESC
-        LIMIT ? OFFSET ?;
+        LIMIT ${limit} OFFSET ${offset};
     `;
 
     try {
-        const pastFlights = await executeQuery(pastFlightsQuery, [origin, destination, limit, offset]);
+        const pastFlights = await executeQuery(pastFlightsQuery, [origin, destination ]);
+        pastFlights.map((flight) => {
+            flight.date = flight.date.toLocaleDateString('en-CA').split("T")[0];
+        })
+
+        console.log(pastFlights)
         return NextResponse.json(pastFlights);
     } catch (error) {
         console.error("Error fetching past flights:", error);
