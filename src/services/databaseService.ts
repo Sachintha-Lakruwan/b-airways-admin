@@ -7,15 +7,16 @@ import { executeQuery } from "@database/database";
  */
 export async function getRevenueByAircraftType(airplaneModel: string) {
     const query = `
-        SELECT airplane_model.name AS aircraft_type,
-            SUM(booking.price) AS total_revenue
+        SELECT SUM(booking.price) AS total_revenue
         FROM booking
         JOIN schedule ON booking.schedule_id = schedule.id
         JOIN airplane ON schedule.airplane_number = airplane.tail_number
         JOIN airplane_model ON airplane.model_id = airplane_model.id
-        GROUP BY airplane_model.id, airplane_model.name;
+        WHERE airplane_model.name = ?;
     `;
-    return await executeQuery(query, [airplaneModel]);
+    const res = await executeQuery(query, [airplaneModel]);
+    console.log(res[0]);
+    return res[0]
 }
 
 /**
