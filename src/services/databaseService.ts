@@ -19,6 +19,36 @@ export async function getRevenueByAircraftType(airplaneModel: string) {
 }
 
 /**
+ * Fetch past flights with state and passenger count based on origin and destination.
+ * @param origin Origin airport code (alpha-3)
+ * @param destination Destination airport code (alpha-3)
+ * @param limit Number of records to return
+ * @param offset Number of records to skip for pagination
+ */
+export async function getPastFlights(origin: string, destination: string, limit: number, offset: number) {
+    const query = `
+        SELECT 
+            s.flight_code AS flight_code,
+            s.date AS flight_date,
+            CASE 
+                WHEN MAX(s.delay) > '00:00:00' THEN CONCAT('Delayed ', MAX(s.delay))
+                ELSE 'On-time'
+            END AS state,
+            COUNT(b.id) AS passenger_count
+        FROM schedule s
+        JOIN route r ON s.flight_code = r.flight_code
+        LEFT JOIN booking b ON s.id = b.schedule_id
+        WHERE r.departure = ? 
+        AND r.arrival = ? 
+        AND s.date < CURRENT_DATE
+        GROUP BY s.flight_code, s.date
+        ORDER BY s.date DESC
+        LIMIT ? OFFSET ?;
+    `;
+    return await executeQuery(query, [origin, destination, limit, offset]);
+}
+
+/**
  * Get passenger count by age group for a given flight.
  * @param flightCode The flight code.
  */
