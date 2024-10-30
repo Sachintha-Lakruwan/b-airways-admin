@@ -1,5 +1,5 @@
 // src/app/api/analytics/flights/past_flight_data/route.ts
-//NEEDS FIXING
+//TESTED AND CONFIRMED
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "@database/database"; // Adjust the path as necessary
 

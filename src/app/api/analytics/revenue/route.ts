@@ -1,5 +1,5 @@
 // src/app/api/analytics/revenue/route.ts
-//NEEDS FIXING
+//TESTED AND CONFIRMED
 import { NextRequest, NextResponse } from "next/server";
 import { getRevenueByAircraftType } from "@services/databaseService";
 
